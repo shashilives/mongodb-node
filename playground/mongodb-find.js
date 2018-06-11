@@ -8,7 +8,7 @@ MongoClient.connect(url, (err, client) => {
     }
     console.log('Connected to MongoDb server');
     const db = client.db('TodoApp')
-    
+
     // db.collection('Users').find({age : 28}).toArray()
     //     .then((docs) => {
     //         console.log(docs);
@@ -25,10 +25,10 @@ MongoClient.connect(url, (err, client) => {
     //     console.log(err);
 
     // }));
-    db.collection('Users').find({user:'Chandru'})
-        .toArray().then( (docs) => {
+    db.collection('Users').find({ user: 'Chandru' })
+        .toArray().then((docs) => {
             console.log(JSON.stringify(docs, undefined, 2));
-            
+
         });
 
     client.close();

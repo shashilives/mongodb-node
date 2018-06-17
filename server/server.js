@@ -1,10 +1,10 @@
 var { mongoose } = require('./db/mongoose');
+const { ObjectID } = require("mongodb");
 const express = require('express');
 const bodyParser = require('body-parser');
 var { Todo } = require('./model/todo');
 var { User } = require('./model/User');
 var port = process.env.PORT || 3000; // for heroku to send the port number
-
 var app = express();
 app.use(bodyParser.json());
 
@@ -40,6 +40,22 @@ app.get('/todos', (req, res) => {
 
 
 });
-app.get('/todos/:id', (req, res) => {
 
+app.get('/todos/:id', (req, res) => {
+    let id = req.params.id;
+
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).send();
+
+    }
+
+    Todo.findById(id).then((todo) => {
+        if (!todo) {
+            return res.status(404).send('NOt found');
+        }
+        res.send({ todo })
+    }, (err) => {
+        return res.status(404).send(err);
+
+    })
 });

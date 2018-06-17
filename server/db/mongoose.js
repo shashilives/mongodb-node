@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-let url = "mongodb://localhost:27017/TodoApp";
+let url = process.env.MONGODB_URL || "mongodb://localhost:27017/TodoApp";
 
 mongoose.Promise = global.Promise;
 mongoose.connect(url, () => {

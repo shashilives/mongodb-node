@@ -1,34 +1,34 @@
-//const MongoClient = require('mongodb').MongoClient;
-const { MongoClient, ObjectID } = require("mongodb");
+// const MongoClient = require('mongodb').MongoClient;
+const {MongoClient, ObjectID} = require('mongodb');
 
-var url = "mongodb://localhost:27017/TodoApp";
-MongoClient.connect(url, (err, client) => {
-    if (err) {
-        return console.log('Unable to connect to MongoDb server');
-    }
-    const db = client.db('TodoApp');
-    //delete many
-    // db.collection('Users').deleteMany({ location: 'Blr' })
-    //     .then((res) => {
-    //         console.log(res);
+MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
+  if (err) {
+    return console.log('Unable to connect to MongoDB server');
+  }
+  console.log('Connected to MongoDB server');
 
-    //     })
+  // deleteMany
+  // db.collection('Todos').deleteMany({text: 'Eat lunch'}).then((result) => {
+  //   console.log(result);
+  // });
 
-    //delete one 
+  // deleteOne
+  // db.collection('Todos').deleteOne({text: 'Eat lunch'}).then((result) => {
+  //   console.log(result);
+  // });
 
-    // db.collection('Users')
-    //     .deleteOne({ location: 'Blr' })
-    //     .then((res) => {
-    //         console.log(res);
+  // findOneAndDelete
+  // db.collection('Todos').findOneAndDelete({completed: false}).then((result) => {
+  //   console.log(result);
+  // });
 
-    //     })
-    //find one and delete == return the deleted document
-    // db.collection('Users').findOneAndDelete({ location: 'Blr' })
-    //     .then(res => { console.log(res) });
+  // db.collection('Users').deleteMany({name: 'Andrew'});
 
-    db.collection('Users').findOneAndDelete({ _id: new ObjectID("5b1e7befc46a61503167d99a") })
-        .then(
-            res => console.log(res)
-        );
-    client.close();
+  db.collection('Users').findOneAndDelete({
+    _id: new ObjectID("57ac8d47878a299e5dc21bc8")
+  }).then((results) => {
+    console.log(JSON.stringify(results, undefined, 2));
+  });
+
+  // db.close();
 });
